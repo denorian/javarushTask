@@ -14,6 +14,7 @@ public class Space {
     //Список ракет
     private ArrayList<Rocket> rockets = new ArrayList<Rocket>();
 
+    public static Space game;
     public static void main(String[] args) {
 
     }
