@@ -14,4 +14,9 @@ public class Order {
         this.tablet = tablet;
         this.dishes = ConsoleHelper.getAllDishesForOrder();
     }
+
+    @Override
+    public String toString() {
+        return dishes.isEmpty() ? "" : String.format("Your order: %s of %s", dishes, tablet);
+    }
 }

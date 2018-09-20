@@ -61,6 +61,12 @@ public class Tile {
             case 2048:
                 color = new Color(0xedc22e);
                 break;
+            case 4096:
+                color = new Color(0x0edc22);
+                break;
+            case 8192:
+                color = new Color(0x0a4c22);
+                break;
             default:
                 color = new Color(0xff0000);
         }

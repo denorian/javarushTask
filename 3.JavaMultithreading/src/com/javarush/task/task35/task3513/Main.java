@@ -7,7 +7,7 @@ public class Main {
         Model model = new Model();
         Controller controller = new Controller(model);
         JFrame game = new JFrame();
-        game.setTitle("2048");
+        game.setTitle("8192");
         game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         game.setSize(450, 500);
         game.setResizable(false);
