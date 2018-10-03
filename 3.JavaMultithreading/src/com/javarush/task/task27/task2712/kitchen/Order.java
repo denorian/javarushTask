@@ -17,6 +17,23 @@ public class Order {
 
     @Override
     public String toString() {
-        return dishes.isEmpty() ? "" : String.format("Your order: %s of %s", dishes, tablet);
+        return dishes.isEmpty() ? "" : String.format("Your order: %s of %s, cooking time %smin", dishes, tablet, getTotalCookingTime());
     }
+
+
+    public int getTotalCookingTime()
+    {
+        int sum = 0;
+        for (Dish dish : dishes)
+        {
+            sum += dish.getDuration();
+        }
+        return sum;
+    }
+
+    public boolean isEmpty()
+    {
+        return dishes.isEmpty();
+    }
+
 }
