@@ -34,7 +34,7 @@ public class ConsoleHelper {
                 try {
                     listDish.add(Dish.valueOf(str));
                 }catch (IllegalArgumentException e){
-                    writeMessage(str + " is not detected");
+                    writeMessage("Такого блюда нет в меню.");
                 }
             }
         }
