@@ -4,6 +4,7 @@ import com.javarush.task.task27.task2712.ConsoleHelper;
 import com.javarush.task.task27.task2712.Tablet;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class Order {
@@ -12,35 +13,34 @@ public class Order {
 
     public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
-        this.dishes = ConsoleHelper.getAllDishesForOrder();
+        dishes = ConsoleHelper.getAllDishesForOrder();
+        ConsoleHelper.writeMessage(this.toString());
     }
 
     @Override
     public String toString() {
-        return dishes.isEmpty() ? "" : String.format("Your order: %s of %s, cooking time %smin", dishes, tablet, getTotalCookingTime());
+        return dishes.size() != 0 ?
+                String.format("Your order: %s of %s", Arrays.toString(dishes.toArray()), tablet) : "";
     }
 
-
-    public int getTotalCookingTime()
-    {
-        int sum = 0;
-        for (Dish dish : dishes)
-        {
-            sum += dish.getDuration();
-        }
-        return sum;
-    }
-
-    public boolean isEmpty()
-    {
-        return dishes.isEmpty();
+    public int getTotalCookingTime(){
+        return dishes.stream().mapToInt((s)->s.getDuration()).sum();
     }
 
     public List<Dish> getDishes() {
         return dishes;
     }
 
-    public Object getTablet() {
+    public Tablet getTablet() {
         return tablet;
+    }
+
+    public boolean isEmpty(){
+        return dishes.isEmpty();
+    }
+
+    public void initDishes() throws IOException {
+        ConsoleHelper.writeMessage(Dish.allDishesToString());
+        dishes = ConsoleHelper.getAllDishesForOrder();
     }
 }

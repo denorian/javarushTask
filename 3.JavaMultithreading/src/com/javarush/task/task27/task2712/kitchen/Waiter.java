@@ -7,9 +7,7 @@ import java.util.Observer;
 
 public class Waiter implements Observer {
     @Override
-
-    public void update(Observable cook, Object order)
-    {
-        ConsoleHelper.writeMessage(order + " was cooked by " + cook);
+    public void update(Observable cook, Object order) {
+        ConsoleHelper.writeMessage(String.format("%s was cooked by %s", order, cook));
     }
 }

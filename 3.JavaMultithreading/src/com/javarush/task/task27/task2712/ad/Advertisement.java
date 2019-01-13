@@ -1,11 +1,18 @@
 package com.javarush.task.task27.task2712.ad;
 
-public class Advertisement {
+// рекламное объявление
+public class Advertisement implements Cloneable {
+    // видео
     private Object content;
+    // имя/название
     private String name;
+    // начальная сумма, стоимость рекламы в копейках
     private long initialAmount;
+    // количество оплаченных показов
     private int hits;
+    // продолжительность в секундах
     private int duration;
+    // стоимости одного показа рекламного объявления в копейках
     private long amountPerOneDisplaying;
 
     public Advertisement(Object content, String name, long initialAmount, int hits, int duration) {
@@ -14,42 +21,29 @@ public class Advertisement {
         this.initialAmount = initialAmount;
         this.hits = hits;
         this.duration = duration;
-        this.amountPerOneDisplaying = hits == 0 ? 0 : initialAmount / hits;
+        if (hits != 0)
+            this.amountPerOneDisplaying = initialAmount / hits;
     }
 
     public String getName() {
         return name;
     }
 
-    public long getAmountPerOneDisplaying() {
-        return amountPerOneDisplaying;
-    }
-
     public int getDuration() {
         return duration;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public void setAmountPerOneDisplaying(long amountPerOneDisplaying) {
-        this.amountPerOneDisplaying = amountPerOneDisplaying;
-    }
-
-    public void revalidate(){
-        if(hits <= 0){
-            throw new UnsupportedOperationException();
-        }
-        hits--;
-        
+    public long getAmountPerOneDisplaying() {
+        return amountPerOneDisplaying;
     }
 
     public int getHits() {
         return hits;
+    }
+
+    public void revalidate() {
+        if (hits <= 0)
+            throw new NoVideoAvailableException();
+        hits--;
     }
 }
