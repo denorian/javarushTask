@@ -32,6 +32,14 @@ public class StatisticManager {
         cooks.add(cook);
     }
 
+    public Set<Cook> getCooks() {
+        return cooks;
+    }
+
+    public void setCooks(Set<Cook> cooks) {
+        this.cooks = cooks;
+    }
+
     public Map<Date, Double> getProfitReport() {
         Map<Date, Double> result = new TreeMap<>(Collections.reverseOrder());
 

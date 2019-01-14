@@ -11,29 +11,36 @@ public class Restaurant {
     private static final int ORDER_CREATING_INTERVAL = 100;
 
     public static void main(String[] args) {
-        List<Tablet> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(new Tablet(i));
+        Cook cook1 = new Cook("Amigo");
+        Cook cook2 = new Cook("MagicCook");
+        StatisticManager.getInstance().register(cook1);
+        StatisticManager.getInstance().register(cook2);
+
+        OrderManager orderManager = new OrderManager();
+        List<Tablet> tablets = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Tablet tablet = new Tablet(i);
+            tablets.get(i).addObserver(orderManager);
+            tablets.get(i).addObserver(orderManager);
+            tablets.add(tablet);
         }
-        Cook[] cooks = new Cook[2];
+
         Waiter waiter = new Waiter();
-        for (int i = 0; i < 2; i++) {
-            cooks[i] = new Cook("cook №" + i);
-            cooks[i].addObserver(waiter);
-        }
-        for (int i = 0; i < 10; i++) {
-            list.get(i).addObserver(cooks[i % 2]);
-        }
-        Thread thread = new Thread(new RandomOrderGeneratorTask(list, ORDER_CREATING_INTERVAL));
+        cook1.addObserver(waiter);
+        cook2.addObserver(waiter);
+
+        Thread thread = new Thread(new RandomOrderGeneratorTask(tablets, ORDER_CREATING_INTERVAL));
         thread.start();
+
 
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        thread.interrupt();
 
+        thread.interrupt();
+        
         DirectorTablet directorTablet = new DirectorTablet();
         directorTablet.printAdvertisementProfit();
         directorTablet.printCookWorkloading();
